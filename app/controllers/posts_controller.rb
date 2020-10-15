@@ -3,9 +3,8 @@ class PostsController < ApplicationController
     @posts = Post.all.order(id: "DESC")
   end
   def create
-    Post.create(content: params[:content])
-    # メモを保存した後にトップページへリダイレクト
-    redirect_to action: :index
+    post = Post.create(content: params[:content], checked: false)
+    render json:{ post: post }
   end
   # checkedアクションは、「既読」の操作を行ったときに実行されるアクション
   def checked
